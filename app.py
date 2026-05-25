@@ -1,29 +1,33 @@
 import streamlit as st
 
-# Sahifa uslubini chiroyli qilish uchun
+# Sahifa uslubini chiroyli qilish
 st.markdown("""
     <style>
-    .big-font { font-size:24px !important; color: #FF4B4B; font-family: 'cursive'; }
-    .msg-font { font-size:20px !important; font-family: 'serif'; text-align: center; }
+    .title-style { font-size: 32px; color: #FF4B4B; text-align: center; font-family: 'Georgia', serif; }
+    .text-style { font-size: 20px; font-family: 'Georgia', serif; line-height: 1.8; color: #333; text-align: justify; }
     </style>
     """, unsafe_allow_html=True)
 
-st.title("✨ Sirli sovg'a")
-
+# Kodni saqlash uchun state
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.write("Bu eshik ortida faqat senga atalgan so‘zlar bor...")
-    user_input = st.text_input("Maxfiy kodni kiriting:", type="password")
+    st.title("✨ Maxfiy sahifa")
+    user_input = st.text_input("Kod kiritish:", type="password")
     
     if st.button("Ochish"):
         if user_input == "7777":
             st.session_state.authenticated = True
             st.rerun()
         else:
-            st.error("Kod noto‘g‘ri, qayta urinib ko‘r...")
+            st.error("Kod noto‘g‘ri!")
 else:
     st.balloons()
-    st.markdown('<p class="big-font">Salom...</p>', unsafe_allow_html=True)
-    st.markdown('<p class="msg-font">Siz shunchalar go‘zalsizki, nigohim sizdan uzilmaydi. Bu so‘zlar shunchaki e’tirof emas, qalbimning tubidan chiqqan samimiy tuyg‘ularimdir. Sizni chin dildan yaxshi ko‘rib qoldim. ❤️</p>', unsafe_allow_html=True)
+    st.markdown('<p class="title-style">Qalbimdan bir parcha...</p>', unsafe_allow_html=True)
+    st.markdown("""
+    <p class="text-style">
+    Har bir insonning hayotida shunday nomlar borki, ular shunchaki so‘z emas, balki qalbga iliqlik bag‘ishlaydigan xotiralardir. <b>Madina</b> – bu ismning o‘zida qandaydir yorug‘lik va poklik bor. U bilan suhbatlashganda dunyo tashvishlari bir zumga chekinib, barcha narsa o‘z o‘rniga tushgandek tuyuladi.<br><br>
+    Inson ba’zida o‘zining ichki dunyosini, orzu-maqsadlarini tushunadigan, har doim qo‘llab-quvvatlaydigan va ishonch bilan qaraydigan do‘stga ehtiyoj sezadi. Madina esa ana shunday qalbi go‘zal, har bir so‘zida haqiqat va samimiyatni jo etgan insonlardan. U bilan birga har bir daqiqa, har bir kichik suhbat ham qadrli. Hayotda bunday insonlar bilan yo‘l kesishishi – chinakam omad. ❤️
+    </p>
+    """, unsafe_allow_html=True)
