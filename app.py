@@ -1,45 +1,29 @@
 import streamlit as st
 
-# CSS orqali chiroyli dizayn beramiz
+# Sahifa uslubini chiroyli qilish uchun
 st.markdown("""
     <style>
-    .message-box {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 25px;
-        border-radius: 15px;
-        border-left: 5px solid #4B8BBE;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        font-family: 'Arial', sans-serif;
-    }
-    .message-text {
-        font-size: 18px;
-        color: #333;
-        line-height: 1.6;
-    }
-    .name-title {
-        color: #4B8BBE;
-        font-weight: bold;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+    .big-font { font-size:24px !important; color: #FF4B4B; font-family: 'cursive'; }
+    .msg-font { font-size:20px !important; font-family: 'serif'; text-align: center; }
     </style>
-""", unsafe_allow_html=True)
-
-# Matnni chiqarish funksiyasi
-def show_madina_message():
-    st.markdown("""
-    <div class="message-box">
-        <div class="name-title">Madina</div>
-        <p class="message-text">
-            Har bir insonning hayotida shunday nomlar borki, ular shunchaki so‘z emas, 
-            balki qalbga iliqlik bag‘ishlaydigan xotiralardir. 
-            <br><br>
-            Madina – bu ismning o‘zida qandaydir yorug‘lik va poklik bor. 
-            U bilan suhbatlashganda dunyo tashvishlari bir zumga chekinib, 
-            barcha narsa o‘z o‘rniga tushgandek tuyuladi.
-        </p>
-    </div>
     """, unsafe_allow_html=True)
 
-# Sahifada ko'rsatish
-show_madina_message()
+st.title("✨ Sirli sovg'a")
+
+if 'authenticated' not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.write("Bu eshik ortida faqat senga atalgan so‘zlar bor...")
+    user_input = st.text_input("Maxfiy kodni kiriting:", type="password")
+    
+    if st.button("Ochish"):
+        if user_input == "7777":
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("Kod noto‘g‘ri, qayta urinib ko‘r...")
+else:
+    st.balloons()
+    st.markdown('<p class="big-font">Salom...</p>', unsafe_allow_html=True)
+    st.markdown('<p class="msg-font">Siz shunchalar go‘zalsizki, nigohim sizdan uzilmaydi. Bu so‘zlar shunchaki e’tirof emas, qalbimning tubidan chiqqan samimiy tuyg‘ularimdir. Sizni chin dildan yaxshi ko‘rib qoldim. ❤️</p>', unsafe_allow_html=True)
